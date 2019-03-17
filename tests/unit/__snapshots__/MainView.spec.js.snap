@@ -1,3 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainView renders the component 1`] = `<div>MainView</div>`;
+exports[`MainView renders the component 1`] = `
+<div>MainView
+  <recipelistentry-stub></recipelistentry-stub>
+  <newrecipeform-stub></newrecipeform-stub>
+</div>
+`;

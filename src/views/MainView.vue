@@ -1,9 +1,19 @@
 <script>
+import RecipeListEntry from "@/components/RecipeListEntry";
+import NewRecipeForm from "@/components/NewRecipeForm";
+
 export default {
-  name: "MainView"
+  name: "MainView",
+  components: {
+    RecipeListEntry,
+    NewRecipeForm
+  }
 };
 </script>
 
 <template>
-  <div>MainView</div>
+  <div>MainView
+    <RecipeListEntry/>
+    <NewRecipeForm/>
+  </div>
 </template>
