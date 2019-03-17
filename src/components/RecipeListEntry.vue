@@ -1,9 +1,19 @@
 <script>
 export default {
-  name: "RecipeListEntry"
+  name: "RecipeListEntry",
+  props: {
+    recipe: {
+      type: Object,
+      required: true,
+      defualt: () => ({})
+    }
+  }
 };
 </script>
 
 <template>
-  <div>RecipeListEntry</div>
+  <div>
+    RecipeListEntry
+    {{ recipe }}
+  </div>
 </template>

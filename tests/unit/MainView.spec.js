@@ -44,6 +44,8 @@ describe("MainView", () => {
     });
 
     // assert
+    console.log(recipeListEntry().vm.recipe);
+    console.log(wrapper.vm.recipe);
     expect(recipeListEntry().vm.recipe).toBe(wrapper.vm.recipe);
   });
 });

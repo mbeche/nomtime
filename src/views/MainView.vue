@@ -7,13 +7,18 @@ export default {
   components: {
     RecipeListEntry,
     NewRecipeForm
+  },
+  data() {
+    return {
+      recipe: { name: "" }
+    };
   }
 };
 </script>
 
 <template>
   <div>MainView
-    <RecipeListEntry/>
+    <RecipeListEntry :recipe="recipe"/>
     <NewRecipeForm/>
   </div>
 </template>
