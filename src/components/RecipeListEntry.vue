@@ -2,8 +2,8 @@
 export default {
   name: "RecipeListEntry",
   props: {
-    recipe: {
-      type: Object,
+    recipes: {
+      type: Array,
       required: true,
       defualt: () => ({})
     }
@@ -12,8 +12,7 @@ export default {
 </script>
 
 <template>
-  <div>
-    RecipeListEntry
-    {{ recipe }}
-  </div>
+  <ul>RecipeListEntry
+    <li v-for="(recipe, index) in recipes" v-bind:key="index">{{ recipe }}</li>
+  </ul>
 </template>

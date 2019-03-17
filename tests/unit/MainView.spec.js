@@ -7,7 +7,7 @@ describe("MainView", () => {
   const build = () => {
     const wrapper = shallowMount(MainView, {
       data: () => ({
-        recipe: {}
+        recipes: [{}]
       })
     });
 
@@ -38,14 +38,16 @@ describe("MainView", () => {
     // arrange
     const { wrapper, recipeListEntry } = build();
     wrapper.setData({
-      recipe: {
-        name: "Veggie Delight"
-      }
+      recipes: [
+        {
+          name: "Veggie Delight"
+        }
+      ]
     });
 
     // assert
-    console.log(recipeListEntry().vm.recipe);
-    console.log(wrapper.vm.recipe);
-    expect(recipeListEntry().vm.recipe).toBe(wrapper.vm.recipe);
+    console.log(recipeListEntry().vm.recipes);
+    console.log(wrapper.vm.recipes);
+    expect(recipeListEntry().vm.recipes).toBe(wrapper.vm.recipes);
   });
 });

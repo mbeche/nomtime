@@ -10,16 +10,15 @@ export default {
   },
   data() {
     return {
-      recipe: { name: "" }
+      recipes: [{ name: "" }]
     };
   }
 };
 </script>
 
 <template>
-  <div>
-    MainView
-    <RecipeListEntry :recipe="recipe" />
-    <NewRecipeForm />
+  <div>MainView
+    <RecipeListEntry :recipes="recipes"/>
+    <NewRecipeForm/>
   </div>
 </template>
