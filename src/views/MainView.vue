@@ -17,8 +17,9 @@ export default {
 </script>
 
 <template>
-  <div>MainView
-    <RecipeListEntry :recipe="recipe"/>
-    <NewRecipeForm/>
+  <div>
+    MainView
+    <RecipeListEntry :recipe="recipe" />
+    <NewRecipeForm />
   </div>
 </template>
