@@ -4,9 +4,22 @@ import RecipeListEntry from "@/components/RecipeListEntry";
 import NewRecipeForm from "@/components/NewRecipeForm";
 
 describe("MainView", () => {
+  const build = () => {
+    const wrapper = shallowMount(MainView, {
+      data: () => ({
+        recipe: {}
+      })
+    });
+
+    return {
+      wrapper,
+      recipeListEntry: () => wrapper.find(RecipeListEntry),
+      newRecipe: () => wrapper.find(NewRecipeForm)
+    };
+  };
   it("renders the component", () => {
     // arrange
-    const wrapper = shallowMount(MainView);
+    const { wrapper } = build();
 
     // assert
     expect(wrapper.html()).toMatchSnapshot();
@@ -14,12 +27,23 @@ describe("MainView", () => {
 
   it("renders main child components", () => {
     // arrange
-    const wrapper = shallowMount(MainView);
-    const recipeListEntry = wrapper.find(RecipeListEntry);
-    const newRecipe = wrapper.find(NewRecipeForm);
+    const { recipeListEntry, newRecipe } = build();
 
     // assert
-    expect(recipeListEntry.exists()).toBe(true);
-    expect(newRecipe.exists()).toBe(true);
+    expect(recipeListEntry().exists()).toBe(true);
+    expect(newRecipe().exists()).toBe(true);
+  });
+
+  it("passes a binded recipe prop to the entry component", () => {
+    // arrange
+    const { wrapper, recipeListEntry } = build();
+    wrapper.setData({
+      recipe: {
+        name: "Veggie Delight"
+      }
+    });
+
+    // assert
+    expect(recipeListEntry().vm.recipe).toBe(wrapper.vm.recipe);
   });
 });
