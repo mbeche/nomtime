@@ -1,3 +1,5 @@
+import recipesFixture from "@/../tests/unit/fixtures/recipes";
+
 export default {
-  recipe: {}
+  recipes: recipesFixture.recipes
 };

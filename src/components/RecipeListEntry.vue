@@ -12,7 +12,13 @@ export default {
 </script>
 
 <template>
-  <ul>RecipeListEntry
-    <li v-for="(recipe, index) in recipes" v-bind:key="index">{{ recipe }}</li>
-  </ul>
+  <div>
+    <h2>Recipe List</h2>
+    <ul>
+      <li v-for="(recipe, index) in recipes" v-bind:key="index">
+        <div>Recipe: {{ recipe.title }}</div>
+        <div>Ready In: {{ recipe.readyInMinutes }} minutes</div>
+      </li>
+    </ul>
+  </div>
 </template>

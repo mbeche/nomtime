@@ -52,7 +52,7 @@ describe("MainView", () => {
     wrapper.setData({
       recipes: [
         {
-          name: "Veggie Delight"
+          title: "Veggie Delight"
         }
       ]
     });
