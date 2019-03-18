@@ -1,14 +1,21 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, createLocalVue } from "@vue/test-utils";
+import Vuex from "vuex";
 import MainView from "@/views/MainView";
 import RecipeListEntry from "@/components/RecipeListEntry";
 import NewRecipeForm from "@/components/NewRecipeForm";
+import initialState from "@/store/state";
+import recipesFixture from "./fixtures/recipes";
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 describe("MainView", () => {
+  let state;
+
   const build = () => {
     const wrapper = shallowMount(MainView, {
-      data: () => ({
-        recipes: [{}]
-      })
+      localVue,
+      store: new Vuex.Store({ state })
     });
 
     return {
@@ -17,6 +24,11 @@ describe("MainView", () => {
       newRecipe: () => wrapper.find(NewRecipeForm)
     };
   };
+
+  beforeEach(() => {
+    state = { ...initialState };
+  });
+
   it("renders the component", () => {
     // arrange
     const { wrapper } = build();
@@ -49,5 +61,14 @@ describe("MainView", () => {
     console.log(recipeListEntry().vm.recipes);
     console.log(wrapper.vm.recipes);
     expect(recipeListEntry().vm.recipes).toBe(wrapper.vm.recipes);
+  });
+
+  it("passes binded recipes prop to entry component", () => {
+    // arrange
+    state = recipesFixture;
+    const { recipeListEntry } = build();
+
+    // assert
+    expect(recipeListEntry().vm.recipes).toBe(state.recipes);
   });
 });
