@@ -58,8 +58,6 @@ describe("MainView", () => {
     });
 
     // assert
-    console.log(recipeListEntry().vm.recipes);
-    console.log(wrapper.vm.recipes);
     expect(recipeListEntry().vm.recipes).toBe(wrapper.vm.recipes);
   });
 

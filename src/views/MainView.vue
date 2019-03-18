@@ -1,4 +1,5 @@
 <script>
+import { mapState } from "vuex";
 import RecipeListEntry from "@/components/RecipeListEntry";
 import NewRecipeForm from "@/components/NewRecipeForm";
 
@@ -8,10 +9,10 @@ export default {
     RecipeListEntry,
     NewRecipeForm
   },
-  data() {
-    return {
-      recipes: [{ name: "" }]
-    };
+  computed: {
+    ...mapState({
+      recipes: "recipes"
+    })
   }
 };
 </script>
