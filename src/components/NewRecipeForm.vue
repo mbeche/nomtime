@@ -22,7 +22,12 @@ export default {
 <template>
   <div>
     <form @submit.prevent="addRecipe">
-      <input class="recipe-title" type="text" placeholder="Recipe Name" v-model="newRecipeTitle">
+      <input
+        class="recipe-title"
+        type="text"
+        placeholder="Recipe Name"
+        v-model="newRecipeTitle"
+      />
     </form>
   </div>
 </template>

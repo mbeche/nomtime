@@ -1,18 +1,28 @@
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import RecipeListEntry from "@/components/RecipeListEntry";
-import NewRecipeForm from "@/components/NewRecipeForm";
+// import NewRecipeForm from "@/components/NewRecipeForm";
 
 export default {
   name: "MainView",
   components: {
-    RecipeListEntry,
-    NewRecipeForm
+    RecipeListEntry
+    // NewRecipeForm
   },
   computed: {
     ...mapState({
       recipes: "recipes"
     })
+  },
+  methods: {
+    ...mapMutations(["ADD_RECIPE"]),
+    addRecipe: function() {
+      const recipe = {};
+      recipe["title"] = this.newRecipeTitle;
+      this.ADD_RECIPE(recipe);
+      // this.ADD_RECIPE(this.newRecipeTitle);
+      this.newRecipeTitle = "";
+    }
   }
 };
 </script>
@@ -23,7 +33,16 @@ export default {
       <RecipeListEntry :recipes="recipes"/>
     </div>
     <div class="right">
-      <NewRecipeForm/>
+      <div>
+        <form @submit.prevent="addRecipe">
+          <input
+            class="recipe-title"
+            type="text"
+            placeholder="Recipe Name"
+            v-model="newRecipeTitle"
+          >
+        </form>
+      </div>
     </div>
   </div>
 </template>
