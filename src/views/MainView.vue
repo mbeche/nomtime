@@ -25,13 +25,10 @@ export default {
     ...mapMutations(["ADD_RECIPE"]),
     addRecipe: function() {
       const recipe = {};
-      // recipe["title"] = recipe.title;
-      // console.log(recipe);
       recipe["title"] = this.recipeTitle;
       recipe["readyInMinutes"] = this.recipeTime;
       console.log(recipe);
       this.ADD_RECIPE(recipe);
-      // this.ADD_RECIPE(this.newRecipeTitle);
       this.recipe = {};
     }
   }
@@ -52,24 +49,7 @@ export default {
     <div class="right">
       <h3>Create New Recipe</h3>
       <div>
-        <!-- <NewRecipeForm :recipe="recipe"/> -->
-        <form @submit.prevent="addRecipe">
-          Name:
-          <input
-            class="recipe-title"
-            type="text"
-            placeholder="Recipe Name"
-            v-model="recipeTitle"
-          >
-          Duration:
-          <input
-            class="recipe-time"
-            type="text"
-            placeholder="How long it takes to cook (minutes)"
-            v-model="recipeTime"
-          >
-          <button type="submit" class="add-recipe-button">Submit</button>
-        </form>
+        <NewRecipeForm/>
       </div>
     </div>
   </div>
@@ -137,7 +117,6 @@ li:hover {
 
 h2 {
   background: #2c3d50;
-  /* background: #f4faff; */
   color: #f9f9f9;
   padding: 10px 20px;
   margin: 0;
