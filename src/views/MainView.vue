@@ -1,13 +1,20 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import RecipeListEntry from "@/components/RecipeListEntry";
-// import NewRecipeForm from "@/components/NewRecipeForm";
+import NewRecipeForm from "@/components/NewRecipeForm";
 
 export default {
   name: "MainView",
   components: {
-    RecipeListEntry
-    // NewRecipeForm
+    RecipeListEntry,
+    NewRecipeForm
+  },
+  data() {
+    return {
+      recipe: {},
+      recipeTitle: "",
+      recipeTime: ""
+    };
   },
   computed: {
     ...mapState({
@@ -18,10 +25,14 @@ export default {
     ...mapMutations(["ADD_RECIPE"]),
     addRecipe: function() {
       const recipe = {};
-      recipe["title"] = this.newRecipeTitle;
+      // recipe["title"] = recipe.title;
+      // console.log(recipe);
+      recipe["title"] = this.recipeTitle;
+      recipe["readyInMinutes"] = this.recipeTime;
+      console.log(recipe);
       this.ADD_RECIPE(recipe);
       // this.ADD_RECIPE(this.newRecipeTitle);
-      this.newRecipeTitle = "";
+      this.recipe = {};
     }
   }
 };
@@ -29,18 +40,35 @@ export default {
 
 <template>
   <div class="main">
+    <div class="actions"></div>
     <div class="left">
-      <RecipeListEntry :recipes="recipes"/>
+      <h2>Recipe List</h2>
+      <ul>
+        <li v-for="(recipe, index) in recipes" v-bind:key="index">
+          <RecipeListEntry :recipe="recipe"/>
+        </li>
+      </ul>
     </div>
     <div class="right">
+      <h3>Create New Recipe</h3>
       <div>
+        <!-- <NewRecipeForm :recipe="recipe"/> -->
         <form @submit.prevent="addRecipe">
+          Name:
           <input
             class="recipe-title"
             type="text"
             placeholder="Recipe Name"
-            v-model="newRecipeTitle"
+            v-model="recipeTitle"
           >
+          Duration:
+          <input
+            class="recipe-time"
+            type="text"
+            placeholder="How long it takes to cook (minutes)"
+            v-model="recipeTime"
+          >
+          <button type="submit" class="add-recipe-button">Submit</button>
         </form>
       </div>
     </div>
@@ -63,50 +91,82 @@ body {
 .main {
   display: grid;
   grid-template-columns: repeat(2, 50%);
-  grid-template-rows: 100%;
-  grid-template-areas: "left right";
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "left actions"
+    "left right";
   height: 100%;
 }
 
 input {
   border: none;
-  padding: 20px;
+  padding: 15px;
   width: calc(100% - 40px);
   box-shadow: 0 5px 5px lightgrey;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   outline: none;
 }
 
-.left,
 .right {
-  align-content: left;
   text-align: left;
   padding: 30px;
 }
 
 .left {
+  text-align: left;
+  grid-area: left;
   overflow: scroll;
 }
 
 ul {
   list-style-type: none;
+  margin: 0;
   padding: 0;
 }
+
 ul li {
-  padding: 20px;
+  padding: 10px;
   background: white;
-  margin-bottom: 8px;
+  transition: background-color 0.5s ease;
+  border: 0.25px solid #f8f8f8;
+}
+
+li:hover {
+  background: #d8e0d7;
 }
 
 h2 {
-  padding: 20px;
-  background: #f9f9f9;
-  margin-bottom: 8px;
+  background: #2c3d50;
+  /* background: #f4faff; */
+  color: #f9f9f9;
+  padding: 10px 20px;
+  margin: 0;
+  box-sizing: border-box;
+  height: 50px;
 }
 
 .right {
-  height: 100%;
   grid-area: right;
   background-color: #e9e9e9;
+}
+
+.actions {
+  grid-area: actions;
+  height: 50px;
+  margin: 0px;
+  padding: 0px;
+  background: #f9f9f9;
+}
+
+.add-recipe-button {
+  box-shadow: 0 5px 5px lightgrey;
+  float: right;
+  text-transform: uppercase;
+  background: #2c3d50;
+  border: none;
+  padding: 5px;
+  margin: 10px;
+  color: #f9f9f9;
+  cursor: pointer;
 }
 </style>

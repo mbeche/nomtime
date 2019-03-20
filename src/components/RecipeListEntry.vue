@@ -2,8 +2,8 @@
 export default {
   name: "RecipeListEntry",
   props: {
-    recipes: {
-      type: Array,
+    recipe: {
+      type: Object,
       required: true,
       defualt: () => ({})
     }
@@ -13,12 +13,13 @@ export default {
 
 <template>
   <div>
-    <h2>Recipe List</h2>
-    <ul>
-      <li v-for="(recipe, index) in recipes" v-bind:key="index">
-        <div>Recipe: {{ recipe.title }}</div>
-        <div>Ready In: {{ recipe.readyInMinutes }} minutes</div>
-      </li>
-    </ul>
+    <div class="recipe-entry-title">{{ recipe.title }}</div>
+    <div>Ready In: {{ recipe.readyInMinutes }} minutes</div>
   </div>
 </template>
+
+<style>
+.recipe-entry-title {
+  font-weight: bold;
+}
+</style>
