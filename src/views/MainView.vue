@@ -2,24 +2,29 @@
 import { mapState, mapMutations } from "vuex";
 import RecipeListEntry from "@/components/RecipeListEntry";
 import NewRecipeForm from "@/components/NewRecipeForm";
+import LoadRecipeForm from "@/components/LoadRecipeForm";
+import { db } from "../main";
 
 export default {
   name: "MainView",
   components: {
     RecipeListEntry,
-    NewRecipeForm
+    NewRecipeForm,
+    LoadRecipeForm
   },
   data() {
     return {
+      recipes: [],
       recipe: {},
       recipeTitle: "",
-      recipeTime: ""
+      recipeTime: "",
+      formMode: "add"
     };
   },
-  computed: {
-    ...mapState({
-      recipes: "recipes"
-    })
+  firestore() {
+    return {
+      recipes: db.collection("recipes")
+    };
   },
   methods: {
     ...mapMutations(["ADD_RECIPE"]),
@@ -47,8 +52,27 @@ export default {
       </ul>
     </div>
     <div class="right">
-      <h3>Create New Recipe</h3>
-      <div>
+      <div v-on:click="formMode = 'find'">
+        <img
+          v-bind:class="{open: formMode === 'find'}"
+          class="dropdown-triangle"
+          src=".././assets/triangle.svg"
+        >
+        <h3>Find Recipes</h3>
+      </div>
+      <div v-show="formMode === 'find'">
+        <LoadRecipeForm/>
+      </div>
+      <hr>
+      <div v-on:click="formMode = 'add'">
+        <img
+          v-bind:class="{open: formMode === 'add'}"
+          class="dropdown-triangle"
+          src=".././assets/triangle.svg"
+        >
+        <h3>Create New Recipe</h3>
+      </div>
+      <div v-show="formMode === 'add'">
         <NewRecipeForm/>
       </div>
     </div>
@@ -104,17 +128,6 @@ ul {
   padding: 0;
 }
 
-ul li {
-  padding: 10px;
-  background: white;
-  transition: background-color 0.5s ease;
-  border: 0.25px solid #f8f8f8;
-}
-
-li:hover {
-  background: #d8e0d7;
-}
-
 h2 {
   background: #2c3d50;
   color: #f9f9f9;
@@ -122,6 +135,11 @@ h2 {
   margin: 0;
   box-sizing: border-box;
   height: 50px;
+}
+
+h3 {
+  display: inline;
+  vertical-align: middle;
 }
 
 .right {
@@ -134,7 +152,7 @@ h2 {
   height: 50px;
   margin: 0px;
   padding: 0px;
-  background: #f9f9f9;
+  background: #8a929c;
 }
 
 .add-recipe-button {
@@ -147,5 +165,19 @@ h2 {
   margin: 10px;
   color: #f9f9f9;
   cursor: pointer;
+}
+
+.dropdown-triangle {
+  transform: rotate(0deg);
+  transition: transform 0.5s linear;
+  vertical-align: middle;
+  margin: 10px;
+  width: 10px;
+  height: 10px;
+}
+
+.dropdown-triangle.open {
+  transform: rotate(90deg);
+  transition: transform 0.5s linear;
 }
 </style>
