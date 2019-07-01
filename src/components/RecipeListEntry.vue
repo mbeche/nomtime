@@ -45,7 +45,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .remove {
   float: right;
   text-transform: uppercase;

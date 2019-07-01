@@ -102,7 +102,7 @@ body {
   height: 100%;
 }
 
-input {
+input.custom {
   border: none;
   padding: 15px;
   width: calc(100% - 40px);

@@ -32,10 +32,15 @@ export default {
   <div>
     <form @submit.prevent="addRecipe">
       Name:
-      <input class="recipe-title" type="text" placeholder="Recipe Name" v-model="recipeTitle">
+      <input
+        class="recipe-title custom"
+        type="text"
+        placeholder="Recipe Name"
+        v-model="recipeTitle"
+      >
       Duration:
       <input
-        class="recipe-time"
+        class="recipe-time custom"
         type="number"
         placeholder="How long it takes to cook (minutes)"
         v-model.number="recipeTime"
