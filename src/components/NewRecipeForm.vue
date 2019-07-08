@@ -12,8 +12,9 @@ export default {
   },
   methods: {
     ...mapMutations(["ADD_RECIPE"]),
-    showRecipes(plan) {
-      this.$store.dispatch("getRecipes", plan);
+    showRecipes(query) {
+      console.log(query);
+      this.$store.dispatch("getRecipes", query);
     },
     addRecipe: function() {
       const recipe = {};
@@ -37,16 +38,16 @@ export default {
         type="text"
         placeholder="Recipe Name"
         v-model="recipeTitle"
-      >
+      />
       Duration:
       <input
         class="recipe-time custom"
         type="number"
         placeholder="How long it takes to cook (minutes)"
         v-model.number="recipeTime"
-      >
+      />
       <button type="submit" class="add-recipe-button">Submit</button>
     </form>
-    <button @click="showRecipes('balanced')">Select This Plan</button>
+    <button @click="showRecipes(recipeTitle)">Select This Plan</button>
   </div>
 </template>

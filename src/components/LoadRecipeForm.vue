@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     ...mapMutations(["ADD_RECIPE"]),
-    showRecipes(query, diet, health) {
+    showRecipes(query) {
       this.$store.dispatch("getRecipes", query);
     },
     loadRecipe: function() {
@@ -133,6 +133,7 @@ export default {
       </div>
       <button type="submit" class="add-recipe-button">Submit</button>
     </form>
+    <button @click="showRecipes(query)">Load Recipes</button>
     <div style="clear: both;"></div>
   </div>
 </template>

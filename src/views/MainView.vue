@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 import RecipeListEntry from "@/components/RecipeListEntry";
 import NewRecipeForm from "@/components/NewRecipeForm";
 import LoadRecipeForm from "@/components/LoadRecipeForm";
@@ -47,7 +47,7 @@ export default {
       <h2>Recipe List</h2>
       <ul>
         <li v-for="(recipe, index) in recipes" v-bind:key="index">
-          <RecipeListEntry :recipe="recipe"/>
+          <RecipeListEntry :recipe="recipe" />
         </li>
       </ul>
     </div>
@@ -57,23 +57,23 @@ export default {
           v-bind:class="{open: formMode === 'find'}"
           class="dropdown-triangle"
           src=".././assets/triangle.svg"
-        >
+        />
         <h3>Find Recipes</h3>
       </div>
       <div v-show="formMode === 'find'">
-        <LoadRecipeForm/>
+        <LoadRecipeForm />
       </div>
-      <hr>
+      <hr />
       <div v-on:click="formMode = 'add'">
         <img
           v-bind:class="{open: formMode === 'add'}"
           class="dropdown-triangle"
           src=".././assets/triangle.svg"
-        >
+        />
         <h3>Create New Recipe</h3>
       </div>
       <div v-show="formMode === 'add'">
-        <NewRecipeForm/>
+        <NewRecipeForm />
       </div>
     </div>
   </div>

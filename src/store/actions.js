@@ -6,7 +6,7 @@ export default {
     try {
       let response = await axios.get(`${state.apiUrl}`, {
         params: {
-          q: "",
+          q: query,
           diet: diet,
           health: health,
           app_id: keys["edamam"]["app_id"],
@@ -15,6 +15,7 @@ export default {
           to: 9
         }
       });
+      console.log(response);
       commit("setRecipes", response.data.hits);
     } catch (error) {
       commit("setRecipes", []);
